@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!--
+			#hibernate.dialect org.hibernate.dialect.MySQLDialect
+			#hibernate.connection.driver_class com.mysql.jdbc.Driver
+			#hibernate.connection.url jdbc:mysql:///test
+			#hibernate.connection.username gavin
+			#hibernate.connection.password
+			
+			hibernate.format_sql true
+			
+			#hibernate.show_sql true
+			
+			#hibernate.hbm2ddl.auto update
+			
+			
+		 -->		
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql:///ssh_crm</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		<mapping resource="cn/system/domain/role.hbm.xml"/>
+		<mapping resource="cn/system/domain/user.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>	
+	

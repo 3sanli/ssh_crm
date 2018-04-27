@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="crm" namespace="/" extends="struts-default">
+		<!-- class写的是application中注册的userAction名称 -->
+		<action name="UserAction_*" class="userAction" method="{1}">			
+			<result name="login" type="dispatcher">/myjsp/success.jsp</result>
+			<allowed-methods>login</allowed-methods>
+		</action>
+		
+		<action name="CustomerAction_*" class="customerAction" method="{1}">
+			<result name="add" type="redirectAction">
+				<param name="actionName">CustomerAction_list</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="list" type="dispatcher">/jsp/customer/list.jsp</result>
+			<allowed-methods>add,list</allowed-methods>
+		</action>
+		
+		<action name="LinkManAction_*" class="linkManAction" method="{1}">
+			<result name="add" type="redirectAction">
+				<param name="actionName">LinkManAction_list</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="list" type="dispatcher">/jsp/linkman/list.jsp</result>
+			<allowed-methods>add,list</allowed-methods>
+		</action>
+	</package>
+</struts>	
