@@ -110,6 +110,8 @@
 			<tx:method name="save*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
 			<tx:method name="modify*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
 			<tx:method name="delete*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+			
+			<tx:method name="*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true"/>
 		</tx:attributes>
 	</tx:advice>
 	<aop:config>

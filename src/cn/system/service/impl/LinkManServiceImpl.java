@@ -15,7 +15,7 @@ public class LinkManServiceImpl implements LinkManService {
 	private LinkManDao lkmDao;
 	@Override
 	public void addLinkMan(LinkMan lkm) {
-		Customer cust = custDao.getCustomerById(lkm.getCust_id());
+		Customer cust = (Customer) custDao.getById(lkm.getCust_id());
 		lkm.setCust(cust);
 		lkmDao.addLinkMan(lkm);
 	}

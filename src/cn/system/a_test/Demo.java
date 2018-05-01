@@ -1,5 +1,7 @@
 package cn.system.a_test;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.hibernate.Session;
@@ -12,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.system.dao.BaseDao;
 import cn.system.dao.UserDao;
 import cn.system.domain.Customer;
 import cn.system.domain.User;
@@ -61,5 +64,11 @@ public class Demo {
 		DetachedCriteria dc = DetachedCriteria.forClass(Customer.class);
 		cs.listCustomer(dc);
 		
+	}
+	@Test
+	public void fun5() {	
+		DetachedCriteria dc = DetachedCriteria.forClass(Customer.class);
+		List<Customer> list = cs.listCustomer(dc);
+		System.out.println(list);
 	}
 }

@@ -1,10 +1,8 @@
 package cn.system.dao.impl;
 
-import javax.annotation.Resource;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -13,8 +11,6 @@ import cn.system.dao.UserDao;
 import cn.system.domain.User;
 
 public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
-	@Resource(name="sessionFactory")
-	private SessionFactory sf;
 	
 	@Override
 	public User getUserByCode(String user_code) {		

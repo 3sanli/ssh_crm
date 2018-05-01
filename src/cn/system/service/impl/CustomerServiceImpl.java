@@ -12,11 +12,11 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDao cd;
 	@Override
 	public void addCustomer(Customer cust) {
-		cd.addCustomer(cust);
+		cd.save(cust);
 	}
 	@Override
 	public List<Customer> listCustomer(DetachedCriteria dc) {
-		List <Customer> custs = cd.getCustomerAllOrByName(dc);
+		List <Customer> custs = cd.list(dc);
 		return custs;
 	}
 	public void setCd(CustomerDao cd) {
