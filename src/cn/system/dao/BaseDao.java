@@ -15,9 +15,9 @@ public interface BaseDao<T> {
 	//更新
 	void update(T t);
 	//查询所有记录
-	List list(DetachedCriteria dc);
+	List list(DetachedCriteria dc,Integer start,Integer pageRecord);
 	//查询所有记录数
-	Integer getCount();
+	Integer getCount(DetachedCriteria dc);
 	//根据名字查询
 	List getByName(String name);
 	//根据id查询

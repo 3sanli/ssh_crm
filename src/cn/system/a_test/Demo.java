@@ -59,7 +59,7 @@ public class Demo {
 		User u = us.getUser(user);
 		System.out.println(u);
 	}
-	@Test
+	/*@Test
 	public void fun4() {	
 		DetachedCriteria dc = DetachedCriteria.forClass(Customer.class);
 		cs.listCustomer(dc);
@@ -71,4 +71,10 @@ public class Demo {
 		List<Customer> list = cs.listCustomer(dc);
 		System.out.println(list);
 	}
+	@Test
+	public void fun6() {	
+		Customer c = new Customer();
+		c.setCust_name("测试存储");
+		cs.addCustomer(c);
+	}*/
 }

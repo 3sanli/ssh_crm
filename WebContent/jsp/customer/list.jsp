@@ -11,22 +11,11 @@
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
 	rel=stylesheet>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
-<SCRIPT language=javascript>
-	function to_page(page){
-		if(page){
-			$("#page").val(page);
-		}
-		document.customerForm.submit();
-		
-	}
-</SCRIPT>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/myJs.js"></script>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
-<BODY>
-	<FORM id="customerForm" name="customerForm"
-		action="${pageContext.request.contextPath }/CustomerAction_list"
-		method=post>
+<BODY>	
 		
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
@@ -59,18 +48,25 @@
 							<TBODY>
 								<TR>
 									<TD height=25>
+									<FORM id="customerForm" name="customerForm"
+										action="${pageContext.request.contextPath }/CustomerAction_list"
+										method=post>
 										<TABLE cellSpacing=0 cellPadding=2 border=0>
 											<TBODY>
 												<TR>
 													<TD>客户名称：</TD>
+													
 													<TD><INPUT class=textbox id=sChannel2
 														style="WIDTH: 80px" maxLength=50 name="cust_name"></TD>
-													
+														<input id="currentPage" type="hidden" name="currentPage"/>
+														<input id="pageRecord" type="hidden" name="pageRecord"/>
+														
 													<TD><INPUT class=button id=sButton2 type=submit
 														value=" 筛选 " name=sButton2></TD>
 												</TR>
 											</TBODY>
 										</TABLE>
+									</FORM>
 									</TD>
 								</TR>
 							    
@@ -90,7 +86,7 @@
 													<TD>手机</TD>
 													<TD>操作</TD>											
 												
-												<s:iterator value="#list" var="customer">
+												<s:iterator value="#page.list" var="customer">
 												<TR
 													style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
 													<TD><s:property value="#customer.cust_name"/></TD>
@@ -100,9 +96,9 @@
 													<TD><s:property value="#customer.cust_phone"/></TD>
 													<TD><s:property value="#customer.cust_mobile"/></TD>
 													<TD>
-													<a href="${pageContext.request.contextPath }/customerServlet?method=edit&custId=${customer.cust_id}">修改</a>
+													<a href="${pageContext.request.contextPath }/customerServlet?method=edit&custId=">修改</a>
 													&nbsp;&nbsp;
-													<a href="${pageContext.request.contextPath }/CustomerAction_delete=${customer.cust_id}">删除</a>
+													<a href="${pageContext.request.contextPath }/CustomerAction_delete=">删除</a>
 													</TD>
 												</TR>
 												</s:iterator>
@@ -115,22 +111,22 @@
 									<TD><SPAN id=pagelink>
 											<DIV
 												style="LINE-HEIGHT: 20px; HEIGHT: 20px; TEXT-ALIGN: right">
-												共[<B>${total}</B>]条记录,[<B>${totalPage}</B>]页
+												共[<B><s:property value="#page.recordSize" /></B>]条记录,[<B><s:property value="#page.pageSize" /></B>]页
 												,每页显示
-												<select name="pageSize">
+												<select id="pageSize" name="pageSize" onchange="changePage($('#page').val(),$(this).val())">
 												
-												<option value="15" <c:if test="${pageSize==1 }">selected</c:if>>1</option>
-												<option value="30" <c:if test="${pageSize==30 }">selected</c:if>>30</option>
+												<option value="3" <s:property value="#page.pageRecord==3?'selected':''" /> >3</option>
+												<option value="5" <s:property value="#page.pageRecord==5?'selected':''" /> >5</option>
 												</select>
 												条
-												[<A href="javascript:to_page(${page-1})">前一页</A>]
-												<B>${page}</B>
-												[<A href="javascript:to_page(${page+1})">后一页</A>] 
+												[<A href="javaScript:void(0)" onclick="changePage(${page.currentPage}-1,$('#pageSize').val())">前一页</A>]
+												
+												[<A href="javaScript:void(0)" onclick="changePage(${page.currentPage}+1,$('#pageSize').val())">后一页</A>] 
 												到
-												<input type="text" size="3" id="page" name="page" />
+												<input type="text" size="3" id="page" value=<s:property value="#page.currentPage" /> />
 												页
 												
-												<input type="button" value="Go" onclick="to_page()"/>
+												<input type="button" value="Go" onclick="changePage($('#page').val(),$('#pageSize').val())"/>
 											</DIV>
 									</SPAN></TD>
 								</TR>
@@ -154,6 +150,5 @@
 				</TR>
 			</TBODY>
 		</TABLE>
-	</FORM>
 </BODY>
 </HTML>

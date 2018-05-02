@@ -6,6 +6,8 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import cn.system.dao.BaseDao;
@@ -25,14 +27,21 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 	}
 
 	@Override
-	public List list(DetachedCriteria dc) {
-		List list = getHibernateTemplate().findByCriteria(dc);		
+	public List list(DetachedCriteria dc,Integer start,Integer pageRecord) {
+		List list = getHibernateTemplate().findByCriteria(dc, start, pageRecord);
 		return list;
 	}
 
 	@Override
-	public Integer getCount() {
-		
+	public Integer getCount(DetachedCriteria dc) {
+		dc.setProjection(Projections.rowCount());
+		List<Long> count =  (List<Long>) getHibernateTemplate().findByCriteria(dc);
+		//清空查询条件
+		dc.setProjection(null);
+		if(count != null && count.size()!=0){
+			Long num = count.get(0);
+			return num.intValue();
+		}
 		return null;
 	}
 
