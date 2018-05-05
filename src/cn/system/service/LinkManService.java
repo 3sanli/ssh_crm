@@ -9,5 +9,7 @@ public interface LinkManService {
 	void addLinkMan(LinkMan lkm);
 	//列出联系人名单,封装到pageBean中返回
 	PageBean getPageBean(LinkMan lkm,Integer currentPage,Integer pageRecord);
+	//获得联系人数据
+	LinkMan get(LinkMan lkm);
 
 }

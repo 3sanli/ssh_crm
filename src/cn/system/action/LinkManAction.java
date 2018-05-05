@@ -34,6 +34,12 @@ public class LinkManAction extends ActionSupport implements Preparable{
 		return "list";
 	}
 	
+	public String toEdit() {		
+		LinkMan linkMan = lkms.get(lkm);
+		ActionContext.getContext().put("linkMan", linkMan);		
+		return "edit";
+	}
+	
 	@Override
 	public void prepare() throws Exception {
 		ActionContext.getContext().getValueStack().push(lkm);

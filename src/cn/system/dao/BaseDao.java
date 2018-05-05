@@ -6,6 +6,8 @@ import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
 
 public interface BaseDao<T> {
+	//保存或修改实例
+	void saveOrUpdate(T t);
 	//保存实例
 	void save(T t);
 	//删除实例

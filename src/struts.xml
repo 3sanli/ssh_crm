@@ -25,7 +25,8 @@
 				<param name="namespace">/</param>
 			</result>
 			<result name="list" type="dispatcher">/jsp/linkman/list.jsp</result>
-			<allowed-methods>add,list</allowed-methods>
+			<result name="edit" type="dispatcher">/jsp/linkman/add.jsp</result>
+			<allowed-methods>add,list,toEdit</allowed-methods>
 		</action>
 	</package>
 </struts>	

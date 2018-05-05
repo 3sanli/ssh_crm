@@ -18,7 +18,7 @@ public class LinkManServiceImpl implements LinkManService {
 	
 	@Override
 	public void addLinkMan(LinkMan lkm) {
-		lkmDao.save(lkm);
+		lkmDao.saveOrUpdate(lkm);
 	}
 
 	@Override
@@ -44,6 +44,12 @@ public class LinkManServiceImpl implements LinkManService {
 
 	public void setLkmDao(LinkManDao lkmDao) {
 		this.lkmDao = lkmDao;
+	}
+
+	@Override
+	public LinkMan get(LinkMan lkm) {
+		LinkMan linkMan = lkmDao.getById(lkm.getLkm_id());
+		return linkMan;
 	}
 
 

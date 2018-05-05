@@ -20,7 +20,13 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 		ParameterizedType Superclass = (ParameterizedType) this.getClass().getGenericSuperclass();
 		hostclass = (Class) Superclass.getActualTypeArguments()[0];
 	}
-
+	
+	@Override
+	public void saveOrUpdate(T t) {
+		getHibernateTemplate().saveOrUpdate(t);
+		
+	}
+	
 	@Override
 	public void save(T t) {
 		getHibernateTemplate().save(t);
@@ -74,5 +80,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 		
 		
 	}
+
+	
 
 }
