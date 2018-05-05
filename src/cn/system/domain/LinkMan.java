@@ -30,19 +30,10 @@ public class LinkMan {
 	private String lkm_memo;
 	private Character lkm_gender;
 	
-	private Long cust_id;
 	
 	private Customer cust = new Customer();
 
 	
-	
-	public Long getCust_id() {
-		return cust_id;
-	}
-
-	public void setCust_id(Long cust_id) {
-		this.cust_id = cust_id;
-	}
 
 	public Customer getCust() {
 		return cust;

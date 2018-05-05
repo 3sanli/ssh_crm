@@ -31,7 +31,6 @@
 	</bean>
 	<bean name="linkManService" class="cn.system.service.impl.LinkManServiceImpl">
 		<property name="lkmDao" ref="linkManDao"></property>
-		<property name="custDao" ref="customerDao"></property>
 	</bean>
 	<bean name="linkManAction" class="cn.system.action.LinkManAction" scope="prototype">
 		<property name="lkms" ref="linkManService"></property>

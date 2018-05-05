@@ -13,6 +13,14 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/myJs.js"></script>
 
+<script type="text/javascript">
+	function selectOK(cust_id,cust_name) {
+		window.opener.document.getElementById("custIdInput").value=cust_id;
+		window.opener.document.getElementById("custNameInput").value=cust_name;
+		window.close();	
+	}
+</script>
+
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>	
@@ -60,7 +68,7 @@
 														style="WIDTH: 80px" maxLength=50 name="cust_name"></TD>
 														<input id="currentPage" type="hidden" name="currentPage"/>
 														<input id="pageRecord" type="hidden" name="pageRecord"/>
-														
+														<input type="hidden" name="select" value="<s:property value="#parameters.select"/>" />
 													<TD><INPUT class=button id=sButton2 type=submit
 														value=" 筛选 " name=sButton2></TD>
 												</TR>
@@ -89,17 +97,25 @@
 												<s:iterator value="#page.list" var="customer">
 												<TR
 													style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
+													
 													<TD><s:property value="#customer.cust_name"/></TD>
 													<TD><s:property value="#customer.cust_level"/></TD>
 													<TD><s:property value="#customer.cust_source"/></TD>
 													<TD><s:property value="#customer.cust_linkman"/></TD>
 													<TD><s:property value="#customer.cust_phone"/></TD>
 													<TD><s:property value="#customer.cust_mobile"/></TD>
-													<TD>
-													<a href="${pageContext.request.contextPath }/customerServlet?method=edit&custId=">修改</a>
-													&nbsp;&nbsp;
-													<a href="${pageContext.request.contextPath }/CustomerAction_delete=">删除</a>
-													</TD>
+													<s:if test="#parameters.select" >
+														<td>
+															<input type="button" value="选择" onclick="selectOK('<s:property value="#customer.cust_id" />','<s:property value="#customer.cust_name" />')" />
+														</td>
+													</s:if>
+													<s:else>
+														<TD>
+														<a href="${pageContext.request.contextPath }/customerServlet?method=edit&custId=">修改</a>
+														&nbsp;&nbsp;
+														<a href="${pageContext.request.contextPath }/CustomerAction_delete=">删除</a>
+														</TD>
+													</s:else>
 												</TR>
 												</s:iterator>
 											</TBODY>
@@ -150,5 +166,6 @@
 				</TR>
 			</TBODY>
 		</TABLE>
+		<s:debug></s:debug>
 </BODY>
 </HTML>

@@ -1,8 +1,5 @@
 package cn.system.service;
 
-import java.util.List;
-
-import org.hibernate.criterion.DetachedCriteria;
 
 import cn.system.domain.Customer;
 import cn.system.util.PageBean;

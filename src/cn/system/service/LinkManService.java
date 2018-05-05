@@ -1,15 +1,13 @@
 package cn.system.service;
 
-import java.util.List;
-
-import org.hibernate.criterion.DetachedCriteria;
 
 import cn.system.domain.LinkMan;
+import cn.system.util.PageBean;
 
 public interface LinkManService {
 	//添加联系人
 	void addLinkMan(LinkMan lkm);
-	//列出联系人
-	List<LinkMan> listLinkMan(DetachedCriteria dc);
+	//列出联系人名单,封装到pageBean中返回
+	PageBean getPageBean(LinkMan lkm,Integer currentPage,Integer pageRecord);
 
 }

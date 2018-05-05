@@ -12,9 +12,14 @@ import com.opensymphony.xwork2.Preparable;
 
 import cn.system.domain.LinkMan;
 import cn.system.service.LinkManService;
+import cn.system.util.PageBean;
 
 public class LinkManAction extends ActionSupport implements Preparable{
 	private LinkManService lkms;
+	private PageBean pb;
+	private Integer currentPage;
+	private Integer pageRecord;
+	private Integer custIdInput;
 	private LinkMan lkm = new LinkMan();
 	
 	public String add() {
@@ -23,15 +28,9 @@ public class LinkManAction extends ActionSupport implements Preparable{
 		return "add";
 	}
 	
-	public String list() {
-		DetachedCriteria dc = DetachedCriteria.forClass(LinkMan.class);
-		
-		if(StringUtils.isNotEmpty(lkm.getLkm_name())) {
-			dc.add(Restrictions.like("lkm_name", "%"+lkm.getLkm_name()+"%"));
-		}
-		
-		List<LinkMan> list = lkms.listLinkMan(dc);
-		ActionContext.getContext().put("list", list);
+	public String list() {		
+		pb = lkms.getPageBean(lkm,currentPage,pageRecord);		
+		ActionContext.getContext().put("page", pb);		
 		return "list";
 	}
 	
@@ -43,6 +42,18 @@ public class LinkManAction extends ActionSupport implements Preparable{
 
 	public void setLkms(LinkManService lkms) {
 		this.lkms = lkms;
+	}
+
+	public void setCurrentPage(Integer currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public void setPageRecord(Integer pageRecord) {
+		this.pageRecord = pageRecord;
+	}
+
+	public void setCustIdInput(Integer custIdInput) {
+		this.custIdInput = custIdInput;
 	}
 	
 	

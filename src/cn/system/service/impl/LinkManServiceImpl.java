@@ -2,36 +2,49 @@ package cn.system.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 
 import cn.system.dao.CustomerDao;
 import cn.system.dao.LinkManDao;
 import cn.system.domain.Customer;
 import cn.system.domain.LinkMan;
 import cn.system.service.LinkManService;
+import cn.system.util.PageBean;
 
 public class LinkManServiceImpl implements LinkManService {
-	private CustomerDao custDao;
 	private LinkManDao lkmDao;
+	
 	@Override
 	public void addLinkMan(LinkMan lkm) {
-		Customer cust = (Customer) custDao.getById(lkm.getCust_id());
-		lkm.setCust(cust);
-		lkmDao.addLinkMan(lkm);
+		lkmDao.save(lkm);
 	}
 
 	@Override
-	public List<LinkMan> listLinkMan(DetachedCriteria dc) {
-		List<LinkMan> list = lkmDao.listLinkManAllOrByname(dc);
-		return list;
+	public PageBean getPageBean(LinkMan lkm,Integer currentPage,Integer pageRecord) {
+		DetachedCriteria dc = DetachedCriteria.forClass(LinkMan.class);
+		
+		if(lkm.getCust().getCust_id()!=null) {
+			dc.add(Restrictions.eq("cust", lkm.getCust()));
+		}
+		
+		if(StringUtils.isNotBlank(lkm.getLkm_name())) {
+			dc.add(Restrictions.like("lkm_name", "%"+lkm.getLkm_name()+"%"));
+		}
+		
+		Integer recordSize = lkmDao.getCount(dc);
+		PageBean pb = new PageBean(recordSize, currentPage, pageRecord);
+				
+		List <LinkMan> list = lkmDao.list(dc,pb.getStart(),pb.getPageRecord());
+	
+		pb.setList(list);
+		return pb;
 	}
 
 	public void setLkmDao(LinkManDao lkmDao) {
 		this.lkmDao = lkmDao;
 	}
 
-	public void setCustDao(CustomerDao custDao) {
-		this.custDao = custDao;
-	}
-	
+
 }
