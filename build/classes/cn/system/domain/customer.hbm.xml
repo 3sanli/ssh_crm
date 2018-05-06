@@ -10,9 +10,11 @@
 		<property name="cust_user_id"></property>
 		<property name="cust_create_id"></property>
 		<property name="cust_name"></property>
-		<property name="cust_source"></property>
+		
+		<!-- <property name="cust_source"></property>
 		<property name="cust_industry"></property>
-		<property name="cust_level"></property>
+		<property name="cust_level"></property> -->
+		
 		<property name="cust_linkman"></property>
 		<property name="cust_phone"></property>
 		<property name="cust_mobile"></property>
@@ -20,5 +22,8 @@
 			<key column="lkm_cust_id" ></key>
 			<one-to-many class="LinkMan"/>
 		</set>
+		<many-to-one name="cust_source" column="cust_source" class="BaseDict"></many-to-one>
+		<many-to-one name="cust_industry" column="cust_industry" class="BaseDict"></many-to-one>
+		<many-to-one name="cust_level" column="cust_level" class="BaseDict"></many-to-one>
 	</class>
 </hibernate-mapping>

@@ -37,6 +37,18 @@
 	</bean> 
 	
 	
+	<bean name="baseDictDao" class="cn.system.dao.impl.BaseDictDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<bean name="baseDictService" class="cn.system.service.impl.BaseDictServiceImpl">
+		<property name="bdd" ref="baseDictDao"></property>
+	</bean>
+	<bean name="baseDictAction" class="cn.system.action.BaseDictAction" scope="prototype">
+		<property name="bds" ref="baseDictService"></property>
+	</bean> 
+	
+	
 	
 	
 	

@@ -9,7 +9,35 @@
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
 	rel=stylesheet>
-
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+	function loadSelect(dict_type_code,postionId,selectName,selectId) {
+		var $select = $("<select name="+selectName+"><select/>");
+		$select.append($("<option value=''>---请选择---</option>"));
+		
+		$.post("${pageContext.request.contextPath }/BaseDictAction", { dict_type_code: dict_type_code},
+				   function(data){
+						$.each( data, function(i, json){
+								var $option = $("<option value="+json["dict_id"]+">"+json["dict_item_name"]+"</option>");
+							
+								if(json["dict_id"]==selectId){
+									$option.attr("selected","selected");
+								}
+								$select.append($option);
+							});
+				   });
+		
+		
+				
+		
+		$("#"+postionId).append($select);	
+	}
+	$(document).ready(function(){
+		loadSelect("002","cust_source_id","cust_source.dict_id","");
+		loadSelect("001","cust_industry_id","cust_industry.dict_id","");
+		loadSelect("006","cust_level_id","cust_level.dict_id","");
+	});
+</script>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
@@ -56,23 +84,20 @@
 														style="WIDTH: 180px" maxLength=50 name="cust_name">
 								</td>
 								<td>客户级别 ：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_level">
+								<td id="cust_level_id">
+								
 								</td>
 							</TR>
 							
 							<TR>
 								
 								<td>信息来源 ：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_source">
+								<td id="cust_source_id">
+								
 								</td>
-								<td>联系人：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_linkman">
+								<td>客户所属行业</td>
+								<td id="cust_industry_id">
+								
 								</td>
 							</TR>
 							

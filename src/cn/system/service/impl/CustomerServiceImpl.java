@@ -15,7 +15,7 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDao cd;
 	@Override
 	public void addCustomer(Customer cust) {
-		cd.save(cust);
+		cd.saveOrUpdate(cust);
 	}
 	@Override
 	public PageBean getPageBean(Customer cust,Integer currentPage,Integer pageRecord) {
