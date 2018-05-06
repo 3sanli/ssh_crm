@@ -11,6 +11,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 
 import cn.system.domain.Customer;
+import cn.system.domain.LinkMan;
 import cn.system.service.CustomerService;
 import cn.system.util.PageBean;
 
@@ -25,6 +26,12 @@ public class CustomerAction extends ActionSupport implements Preparable{
 	public String add() {
 		cs .addCustomer(cust);		
 		return "add";
+	}
+	
+	public String toEdit() {		
+		Customer customer = cs.get(cust);
+		ActionContext.getContext().put("customer", customer);		
+		return "edit";
 	}
 	
 	public String list() {				

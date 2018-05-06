@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 
 import cn.system.dao.CustomerDao;
 import cn.system.domain.Customer;
+import cn.system.domain.LinkMan;
 import cn.system.service.CustomerService;
 import cn.system.util.PageBean;
 
@@ -34,6 +35,11 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	public void setCd(CustomerDao cd) {
 		this.cd = cd;
+	}
+	@Override
+	public Customer get(Customer cust) {
+		Customer custmoer = cd.getById(cust.getCust_id());
+		return custmoer;
 	}
 	
 }

@@ -16,7 +16,8 @@
 				<param name="namespace">/</param>
 			</result>
 			<result name="list" type="dispatcher">/jsp/customer/list.jsp</result>
-			<allowed-methods>add,list</allowed-methods>
+			<result name="edit" type="dispatcher">/jsp/customer/add.jsp</result>
+			<allowed-methods>add,list,toEdit</allowed-methods>
 		</action>
 		
 		<action name="LinkManAction_*" class="linkManAction" method="{1}">
